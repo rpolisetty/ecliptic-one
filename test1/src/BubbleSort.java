@@ -2,6 +2,7 @@
  * 
  */
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,7 +12,8 @@ import java.util.List;
 public class BubbleSort {
 
 	private static int count = 10;
-	private static List<String> stringList = new ArrayList<String>();
+//	private static List<String> stringList = new ArrayList<String>();
+	private static String [] stringArray = new String[count];
 	
 	/**
 	 * 
@@ -27,24 +29,38 @@ public class BubbleSort {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		for (int i=0; i < args.length; i++) {
-			System.out.print("argument [" + i + "] = " + args[i]);
+			System.out.println("argument [" + i + "] = " + args[i]);
 		}
 		BubbleSort bs = new BubbleSort();
 		bs.read();
+		bs.print();
 		bs.sort();
 		bs.print();
 	}
 
 	private void print() {
-		System.out.print("Sorted list:");
-		for (int i=0; i < stringList.size(); i++) {
-			System.out.print("Item [" + i + "] = " + stringList.get(i));
+		System.out.println("Sorted list:");
+		for (int i=0; i < stringArray.length; i++) {
+			System.out.println("Item [" + i + "] = " + stringArray[i]);
 		}
 	}
 
 	private void sort() {
-		// TODO Auto-generated method stub
-		System.out.print("sort() not yet implemented");
+	
+		if (stringArray.length <= 1) {
+			return;
+		}
+		
+		for (int i=0; i < stringArray.length - 1; i++) {
+			for (int j=i+1; j < stringArray.length; j++) {
+				
+				if (stringArray[i].compareToIgnoreCase(stringArray[j]) > 0){
+					String temp = stringArray[j];
+					stringArray[j] = stringArray[i];
+					stringArray[i] = temp;
+				}
+			}
+		}
 	}
 
 	private String getRandomString() {
@@ -54,7 +70,7 @@ public class BubbleSort {
 	private void read() {
 		// TODO Auto-generated method stub
 		for (int i=0; i < count; i++) {
-			stringList.add(getRandomString());
+			stringArray[i] = getRandomString();
 		}
 	}
 }
